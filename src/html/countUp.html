@@ -20,6 +20,8 @@
     <!--v-onのイベントは直接入力だけでなく動的に指定可能
       Vueのdataに「event: 'click'」などと記載し、html部分で[event]と指定-->
     <button v-on:[event]="countUp">カウントアップ</button>
+    <!--v-on:は省略記号@に置換可能-->
+    <button @[event]="countUp">カウントアップ</button>
     <p v-on:mousemove="changeMousePojition">マウスカーソルの座標表示
       <!--JSの標準機能「stopPropagation」を実装(イベントを発火させない)-->
       <span v-on:mousemove="noEvent">この部分は座標表示しない</span>
