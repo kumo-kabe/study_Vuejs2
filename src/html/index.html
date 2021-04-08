@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../js/vue.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p> {{ message }}</p>
+    <p>{{number + 3}}</p>
+    <p>{{ok ? 'YES' : 'NO'}}</p>
+    <p>{{sayHi()}}</p>
+    <button v-on:click="reverseMessage">メッセージ反転</button>
+  </div>
+
+  <div id="counter">
+    Counter: {{ counter }}
+  </div>
+
+
+
+  <script>
+    const test = new Vue({
+      el: '#app',
+      data: {
+        message: 'HelloWorld!',
+        number: 3,
+        ok: true
+      },
+      methods: {
+        reverseMessage: function () {
+          this.message = this.message.split("").reverse().join("");
+        },
+        sayHi: function(){
+          return this.message;
+        }
+      }
+    })
+
+    const test2 = new Vue({
+      el: '#counter',
+      data: {
+        counter: 0
+      }
+
+    })
+  </script>
+
+</body>
+
+</html>
