@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,24 +8,41 @@
   <script src="../js/vue.js"></script>
   <title>v-on:clickイベント</title>
 </head>
+
 <body>
   <div id="app">
     <p>現在{{ number }}回クリックされています</p>
-    <button v-on:click="countUp">カウントアップ</button>
+    <button v-on:click="countUp">{{ message }}</button>
+    <p v-on:mousemove="changeMousePojition">マウスカーソルを合わせると座標を表示</p>
+    <p>X:{{x}},Y:{{y}}</p>
   </div>
 
   <script>
+    // Vueのインスタンス作成
     new Vue({
-      el: '#app',
+      el: '#app', // bodyタグのdiv id="app"と対応
       data: {
-        number:　0
+        number: 0, // html側で{{number}}みたいに呼び出す
+        message: 'カウントアップ',
+        x: 0,
+        y: 0
       },
       methods: {
-        countUp : function(){
+        countUp: function () {
           this.number += 1
+        },
+        // イベントオブジェクト利用方法
+        changeMousePojition: function (event) {
+          // Google Chromeでhtml開いてF12キー。マウスカーソル合わせた時の様々なイベントオブジェクト確認できる
+          // その中にブラウザ上の座標を示すイベントある(clientX)
+          // console.log(event)
+          this.x = event.clientX;
+          this.y = event.clientY;
+          // function(～)の引数名はなんでもよいが「event」が無難
         }
       }
     })
   </script>
 </body>
+
 </html>
