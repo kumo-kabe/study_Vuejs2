@@ -18,11 +18,17 @@
     <p>現在{{ num2times }}回クリックされています</p>
     <button v-on:click="countUp2times(2)">カウントアップ(2倍)</button>
 
-    <p v-on:mousemove="changeMousePojition">マウスカーソルの座標表示</p>
+    <p v-on:mousemove="changeMousePojition">マウスカーソルの座標表示
+      <!--JSの標準機能「stopPropagation」を実装-->
+      <span v-on:mousemove="noEvent">この部分は座標表示しない</span>
+    </p>
     <p>X:{{x}},Y:{{y}}</p>
 
     <!--イベントオブジェクトに引数を持たせるには$eventを使う-->
-    <p v-on:mousemove="divideMousePojition($event,10)">マウスカーソルの座標表示(10分の1)</p>
+    <p v-on:mousemove="divideMousePojition($event,10)">マウスカーソルの座標表示(10分の1)
+      <!--Vue.jsでは「stopPropagation」を簡略化できる-->
+      <span v-on:mousemove.stop>この部分は座標表示しない</span>
+    </p>
     <p>X:{{divx}},Y:{{divy}}</p>
   </div>
 
@@ -58,6 +64,10 @@
         divideMousePojition: function (event, divideNumber) {
           this.divx = event.clientX / divideNumber;
           this.divy = event.clientY / divideNumber;
+        },
+
+        noEvent: function (event) {
+          event.stopPropagation()
         }
       }
     })
