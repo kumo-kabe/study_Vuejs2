@@ -33,6 +33,12 @@
 
     <a href="https://google.com">Googleへのリンク</a>
     <a v-on:click.prevent href="https://google.com">リンク無効</a>
+
+    <!--キー修飾子(Enterキー押下時にイベント発火)-->
+    <p><input type="text" v-on:keyup.enter="myAlert"></p>
+    <!--キー修飾子(SpaceキーかEnterキー押下時にイベント発火)-->
+    <p><input type="text" v-on:keyup.space.enter="myAlert"></p>
+
   </div>
 
   <script>
@@ -70,6 +76,9 @@
         },
         noEvent: function (event) {
           event.stopPropagation()
+        },
+        myAlert() {
+          alert('アラート!');
         }
       }
     })
