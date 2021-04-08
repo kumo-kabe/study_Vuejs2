@@ -17,7 +17,9 @@
     <!--v-onメソッドに引数を持たせる-->
     <p>現在{{ num2times }}回クリックされています</p>
     <button v-on:click="countUp2times(2)">カウントアップ(2倍)</button>
-
+    <!--v-onのイベントは直接入力だけでなく動的に指定可能
+      Vueのdataに「event: 'click'」などと記載し、html部分で[event]と指定-->
+    <button v-on:[event]="countUp">カウントアップ</button>
     <p v-on:mousemove="changeMousePojition">マウスカーソルの座標表示
       <!--JSの標準機能「stopPropagation」を実装(イベントを発火させない)-->
       <span v-on:mousemove="noEvent">この部分は座標表示しない</span>
@@ -52,7 +54,8 @@
         x: 0,
         y: 0,
         divx: 0,
-        divy: 0
+        divy: 0,
+        event: 'click'
       },
       methods: {
         countUp: function () {
