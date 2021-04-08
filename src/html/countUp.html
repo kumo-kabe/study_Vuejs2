@@ -19,7 +19,7 @@
     <button v-on:click="countUp2times(2)">カウントアップ(2倍)</button>
 
     <p v-on:mousemove="changeMousePojition">マウスカーソルの座標表示
-      <!--JSの標準機能「stopPropagation」を実装-->
+      <!--JSの標準機能「stopPropagation」を実装(イベントを発火させない)-->
       <span v-on:mousemove="noEvent">この部分は座標表示しない</span>
     </p>
     <p>X:{{x}},Y:{{y}}</p>
@@ -30,11 +30,14 @@
       <span v-on:mousemove.stop>この部分は座標表示しない</span>
     </p>
     <p>X:{{divx}},Y:{{divy}}</p>
+
+    <a href="https://google.com">Googleへのリンク</a>
+    <a v-on:click.prevent href="https://google.com">リンク無効</a>
   </div>
 
   <script>
     // Vueのインスタンス作成
-    new Vue({
+    var vm = new Vue({
       el: '#app', // bodyタグのdiv id="app"と対応
       data: {
         number: 0, // html側で{{number}}みたいに呼び出す
@@ -65,7 +68,6 @@
           this.divx = event.clientX / divideNumber;
           this.divy = event.clientY / divideNumber;
         },
-
         noEvent: function (event) {
           event.stopPropagation()
         }
